@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+
+    <h2>Student Registration Portal</h2>
+
+    <form id="login" method="post">
+        <div class="imgcontainer">
+            <img src="../files_photos/acc_vatar.jpg" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+            <label for="email"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="email" required> 
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <label for="user"><b>User Type</b></label>
+            <select name="user" id="user">
+                <option value="">Select Type</option>
+                <option value="admin">Admin</option>
+                <option value="applicant">Applicant</option>
+               
+            </select>
+
+            <button type="submit">Login</button>
+            
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" id="cancelbtn" class="cancelbtn">Cancel</button>
+            <span class="psw">Need to register a new <a href="register.html">Account?</a></span>
+        </div>
+        
+    </form>
+<script src="../script/query-3.6.0.js"></script>
+<script>
+    $(document).ready(function(){
+           //clear junk data
+           localStorage.setItem("user", "")
+           localStorage.setItem("personal", "")
+
+            localStorage.setItem("kin", "")
+            localStorage.setItem("residence", "")
+            localStorage.setItem("highschool", "")
+            localStorage.setItem("tertiary", "")
+            localStorage.setItem("programme", "")
+            localStorage.setItem("attatchments", "")
+           $("#login").on("submit",function(event){
+               event.preventDefault()  
+               if ($("#user").val() == "") {
+                    alert("User field must be filled!")
+                }else{
+                    const formdata = $(this).serialize()
+                    $.post("../API/login.php",
+                        formdata,
+                    function(res,status){
+                        const response = JSON.parse(res)
+                        if (response.error == false) {
+                            if(response.access == 'applicant'){
+                                location.href ="./personal.html"
+                            }else{
+                                 location.href = "./admission.html"
+
+                            }
+                            
+                            localStorage.setItem("user",JSON.stringify(response.user))
+                        }else{
+                            alert(response.message)
+                            
+                        }
+                    }) 
+                }
+        }) 
+       
+        
+         $("#cancelbtn").click(function () {
+            $("input,select").val("")
+
+        })
+
+      })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta lang="">
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+<body>
+
+<div class="sidebar">
+  <a class="active" href="#home">Home (Personal Info)</a>
+  <a href="#accademics">Accademic Background</a>
+  <a href="#programmes">My Application</a>
+  <a href="#attatchments">Attatchments</a>
+  <a href="#status">Application Status</a>
+  
+</div>
+<!--
+	personal details
+	firstname
+	second name
+	family name
+	year of birth
+	gender
+
+	phone number
+	ID number
+    email address
+
+	//current place of residence
+	Nationality
+	city
+	town
+	zip address
+
+	//next of kin
+	relationship with applicant
+
+	firstname
+	second name
+	family name
+
+	phone number
+	ID number
+    email address
+
+	//current place of residence
+	Nationality
+	city
+	town
+	zip address
+
+	
+
+-->
+
+
+<div class="content" id="content">
+	<h1 >Welcome <span id="logged-user"> Logged User </span> </h1>
+	
+	<div class="panel-body">
+		<form id="personal" method="post" enctype="multipart/form-data">
+			<fieldset>
+				<legend>
+					<h2>Applicant Personal Details</h2>
+				</legend>
+							
+					<label for="fname"><b>First Name</b></label>
+					<input type="text" placeholder="Enter First Name" name="fname" required>
+		
+					<label for="lname"><b>Last Name</b></label>
+					<input type="text" placeholder="Enter Last Name" name="lname" required>
+					
+					<label for="sname"><b>Surname Name</b></label>
+					<input type="text" placeholder="Enter Surname Name" name="sname" required>
+
+					<label for="dob"><b>DOB</b></label>
+					<input type="date" placeholder="Enter Date of Birth" name="dob" required>
+					
+					<label for="gender"><b>Gender</b></label>
+					<select name="gender" id="gender">
+						<option value="">Select Gender</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+					</select>
+					<label for="phoneno"><b>Phone Number</b></label>
+					<input type="text" placeholder="Enter Phone No." name="phoneno" required>
+					
+					<label for="idno"><b>ID No.</b></label>
+					<input type="text" placeholder="Enter ID Number" name="idno" required>
+					
+					<label for="email"><b>Email Address</b></label>
+					<input type="text" placeholder="Enter your Email" name="email" required>
+					
+					<input type="submit" value="Save" />
+					<div style="color:rgb(12, 100, 182); padding:10px; margin:5px; text-align: center; " class="result"></div>
+					<button type="button"id="next1" class="cancelbtn">Next</button>
+					
+			</fieldset>
+		</form>
+		
+		<form id="kin-form" method="post">
+			<fieldset>
+				<legend>
+					<h2>Next of Kin Details</h2>
+				</legend>
+		
+				<label for="relationship"><b>Relationship</b></label>
+				<select name="relationship" id="relationship">
+					<option value="">Select Relationship</option>
+					<option value="parent">Parent</option>
+					<option value="sibling">Sibling</option>
+					<option value="friend">Friend</option>
+				</select>
+		
+				<label for="fname"><b>First Name</b></label>
+				<input type="text" placeholder="Enter First Name" name="fname" required>
+		
+				<label for="lname"><b>Last Name</b></label>
+				<input type="text" placeholder="Enter Last Name" name="lname" required>
+		
+				<label for="sname"><b>Surname Name</b></label>
+				<input type="text" placeholder="Enter Surname Name" name="sname" required>
+		
+				<label for="gender"><b>Gender</b></label>
+				<select name="gender" id="gender">
+					<option value="">Select Gender</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+				</select>
+		
+				<label for="phoneno"><b>Phone Number</b></label>
+				<input type="text" placeholder="Enter Phone No." name="phoneno" required>
+		
+				<label for="idno"><b>ID No.</b></label>
+				<input type="text" placeholder="Enter ID Number" name="idno" required>
+		
+				<label for="email"><b>Email Address</b></label>
+				<input type="text" placeholder="Enter Date of Birth" name="email" required>
+		
+				<input type="submit" value="Save" />
+				<div style="color:rgb(12, 100, 182); padding:10px; text-align: center; margin:5px; " class="result"></div>
+				<button type="button" id="next2" class="cancelbtn">Next</button>
+			</fieldset>
+		</form>
+		
+		<form id="residence-form" method="post">
+			<fieldset>
+				<legend>
+					<h2>Place of Residence</h2>
+				</legend>
+				<label for="nationality"><b>Nationality</b></label>
+				<input type="text" placeholder="Enter Your Resindency" name="nationality" required />
+		
+				<label for="city"><b>Nearest Town</b></label>
+				<input type="text" placeholder="Enter your City" name="city" required />
+		
+				<label for="zip-addr"><b>Zip Address</b></label>
+				<input type="text" placeholder="E.g. Los Angeles, CA: 90210 " name="zip-addr" required />
+				<input type="submit" value="Save" />
+				<div style="color:rgb(12, 100, 182);text-align: center; padding:10px; margin:5px; " class="result"></div>
+				
+				
+			
+			</fieldset>
+		</form>
+	
+	</div> 
+   
+</div>
+<script src="../script/query-3.6.0.js"></script>
+<script src="../script/mainscript.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+		//hide some elements to reduce the size of page
+		$(".result").hide()
+		$("#kin-form").hide()
+		$("#residence-form").hide()
+
+		$("#next1").click(function(){
+			$("#personal").hide()
+			$("#kin-form").show()
+		})
+		$("#next2").click(function () {
+			$("#kin-form").hide()
+			$("#residence-form").show()
+		})
+
+		const userob =JSON.parse(localStorage.getItem("user"))
+		$("#logged-user").text(userob.app_email)
+
+		//app_id is crucial
+		//gender
+		
+			$("#personal").on("submit",function(event){
+				event.preventDefault()
+				const personal =$(this).serialize()
+				if($("#gender").val() == ""){
+					alert("Please select your gender!")
+				}else{
+					localStorage.setItem("personal", personal)
+					$("#personal .result").show()
+					$("#personal .result").text("Personal data saved success!")
+				}
+			})
+
+			$("#kin-form").on("submit",function(event){
+				event.preventDefault()
+				const kin = $(this).serialize()
+				if ($("#relationship").val() == "" || $("#gender").val() ==""  ) {
+					alert("Please select gender and relationship")
+				}else{
+					localStorage.setItem("kin", kin)
+					$("#kin-form .result").show()
+					$("#kin-form .result").text("Kins data saved success!")
+
+				}
+			})
+
+			$("#residence-form").on("submit",function(event){
+				event.preventDefault()
+
+				const residence = $(this).serialize()
+				localStorage.setItem("residence", residence)
+				$("#residence-form .result").show()
+				$("#residence-form .result").text("Residence data saved success!")
+				
+			})
+			
+
+	
+	})   
+        
+       
+
+        
+    </script>

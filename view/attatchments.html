@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<!--
+id file
+highschool transcript and certificate
+college transcript and certificate
+Admission request letter
+passport photo
+
+-->
+
+
+
+
+<h1>Personal Attatchments</h1>
+    <form id="attatchment-form" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>
+                <h2>Compulsory Attatchments</h2>
+            </legend>
+            <label for="idcard"><b>Identification Document </b></label>
+            <input type="file" id="idcard" name="idcard" required /> 
+            <br />
+            <label for="highschool-transcript"><b>High School Transcript/Certificate</b></label>
+            <input type="file" id="highschool-transcript" name="highschool-transcript" required />
+            <br />
+            <label for="tertiary-transcript"><b>Tertiary Transcript/Certificate (optional)(</b></label>
+            <input type="file" id="tertiary-transcript" name="tertiary-transcript"/>
+            <br />
+            <label for="passport-photo"><b>Passport Photo</b></label>
+            <input type="file" id="passport-photo" name="passport-photo" required />
+            <br />
+            <input type="hidden" name="user" id="user"/>
+
+            <input type="submit" value="Save" />
+    
+           <div style="color:rgb(12, 100, 182);text-align: center; padding:10px; margin:5px; " class="result"></div>
+            <button type="button" id="final-submit" class="cancelbtn">Submit</button>
+    
+    
+        </fieldset>
+    </form>
+   
+<script>
+    $(document).ready(function(){ 
+        $("#attatchment-form .result").hide()
+      
+        const userob = JSON.parse(localStorage.getItem("user"))
+        $("#user").val(userob.app_id)
+       $("#attatchment-form").on("submit",function(event){
+           event.preventDefault()
+           const attatchedfiles = new FormData(this)
+          
+     
+           $.ajax({
+				type: 'POST',
+				url: "../API/attatchmentFiles.php",
+				data: attatchedfiles,
+				dataType: 'json',
+                contentType: false,
+				cache: false,
+				processData: false,
+				
+				success: function (response) {
+				   $("#attatchment-form .result").show()
+					//{"error":true,"message":"Sorry, your file was not uploaded."}
+					if (response.error == false) {
+                        
+                         $("#attatchment-form .result").text(response.message)
+                          $("#attatchment-form .result").css({ color: "blue", backgroundColor: "white" })
+                    }else{
+                         $("#attatchment-form .result").text(response.message)
+                          $("#attatchment-form .result").css({color:"red",backgroundColor:"orange"})
+
+                    }
+				}
+			});
+        }) 
+    })
+    
+</script>
+<script src="../script/submitData.js"></script>
+
+</body>
+
+</html>

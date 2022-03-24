@@ -1,0 +1,229 @@
+  <!--
+    level of study
+    diploma
+    degree
+    master
+    doctorate
+
+    programmme applied
+    faculty
+    social sciences
+    (
+      criminalogy
+      socialogy
+      communication
+
+    )
+    Physical sciences(
+      Biochemistry
+      Botany,
+      Microbioloogy
+    )
+    art{
+      CrE
+      Lingustic,
+      History
+      
+    }
+    Bussiness(
+      Bs Admin,
+      B Com
+      economics
+    )
+    Techology{
+      Bit,
+      Comp Sc
+      Inf Sc
+    }
+    Mathematics{
+      Statistics
+      Actuarial Sc
+      
+    }
+    Medicine{
+      Surgery,
+      anatomy,
+      gynacology,
+      Pathology
+
+    }
+    
+
+  -->
+  <h1>Programmmes Offered</h1>
+  <form id="programme" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>
+        <h2>Programme Applied</h2>
+      </legend>
+  
+      <label for="study-level"><b>Level of Study</b></label>
+      <select name="study-level" id="study-level">
+        <option value="">Select Level</option>
+        <option value="diploma">Diploma</option>
+        <option value="degree">Degree</option>
+        <option value="master">Master's</option>
+      </select>
+
+        <label for="study-faculty"><b>Study Faculty</b></label>
+        <select name="study-faculty" id="study-faculty">
+          <option value="">Select Faculty</option>
+          <option value="social science">Social Science</option>
+          <option value="physical science">Physical Science science</option>
+          <option value="arts">Arts</option>
+          <option value="technology">Technology</option>
+          <option value="business">Business</option>
+        </select>
+
+      <div id="social-science-c">
+        <label for="social-science"><b>Study Programmes</b></label>
+        <select name="social-science" id="social-science">
+          <option value="">Select Programme</option>
+          <option value="criminalogy">Criminalogy</option>
+          <option value="socialogy">Socialogy</option>
+          <option value="journalism">Journalism</option>
+        </select>
+      </div>
+
+        <div id="physical-science-c">
+        <label for="physical-science"><b>Study Programmes</b></label>
+        <select name="physical-science" id="physical-science">
+          <option value="">Select Programme</option>
+          <option value="botany">Botany</option>
+          <option value="physics">Physics</option>
+          <option value="chemisitry">Chemisitry</option>
+        </select>
+        </div>
+
+      <div id="arts-c">
+        <label for="arts"><b>Study Programmes</b></label>
+        <select name="arts" id="arts">
+          <option value="">Select Programme</option>
+          <option value="music">Musics</option>
+          <option value="theatre">Theatre</option>
+          <option value="linguistics">Linguistics</option>
+        </select>
+      </div>
+
+      <div id="technology-c">
+         <label for="technology"><b>Study Programmes</b></label>
+        <select name="technology" id="technology">
+          <option value="">Select Programme</option>
+          <option value="computer Science">Computer Science</option>
+          <option value="BIT">BIT</option>
+          <option value="IS">IS</option>
+        </select>
+      </div>
+       
+      <div id="business-c">
+        <label for="business"><b>Study Programmes</b></label>
+        <select name="business" id="business">
+          <option value="">Select Programme</option>
+          <option value="bcom">B. Com</option>
+          <option value="economics">Economics</option>
+          <option value="badmin">B. Admin</option>
+        </select>
+       </div>
+        <input type="submit" value="Save" />
+       <div style="color:rgb(12, 100, 182);text-align: center; padding:10px; margin:5px; " class="result"></div>
+      
+  
+    </fieldset>
+  </form>
+ 
+   
+   
+    <script>
+      $(document).ready(function(){
+        $("#social-science-c").hide()
+        $("#physical-science-c").hide()
+        $("#arts-c").hide()
+        $("#technology-c").hide()
+        $("#business-c").hide()
+        $("#programme .result").hide()
+
+        const facultyelem = $("#study-faculty")
+        facultyelem.on("change",function(){
+          const faculty = $(this).val()
+
+          if (faculty == "social science") {
+            $("#social-science-c").show()
+
+            $("#physical-science-c").hide()
+            $("#arts-c").hide()
+            $("#technology-c").hide()
+            $("#business-c").hide()
+          }else if (faculty == "physical science") {
+            
+            $("#physical-science-c").show()
+            $("#social-science-c").hide()
+            $("#arts-c").hide()
+            $("#technology-c").hide()
+            $("#business-c").hide()
+            
+          }else if (faculty == "arts") {
+
+             $("#arts-c").show()
+
+            $("#social-science-c").hide()
+            $("#physical-science-c").hide()
+            $("#technology-c").hide()
+            $("#business-c").hide()
+            
+          }else if (faculty == "technology") {
+            $("#technology-c").show()
+
+            $("#social-science-c").hide()
+            $("#physical-science-c").hide()
+            $("#arts-c").hide()
+            $("#business-c").hide()
+            
+          }else if (faculty == "business") {
+             $("#business-c").show()
+
+            $("#social-science-c").hide()
+            $("#physical-science-c").hide()
+            $("#arts-c").hide()
+            $("#technology-c").hide()
+            
+            
+          }else{
+           $("#social-science-c").hide()
+            $("#physical-science-c").hide()
+            $("#arts-c").hide()
+            $("#technology-c").hide()
+            $("#business-c").hide()
+
+          }
+        })
+
+      $("#programme").on("submit",function(event){
+        event.preventDefault()
+        const level=$("#study-level").val() 
+        const faculty =$("#study-faculty").val()
+        let facultyid =faculty.replace(" ","-")
+       
+        facultyid="#"+facultyid
+        const programme =$(facultyid).val()
+        if (level =="" || faculty=="" || programme == "") {
+          alert("All field must be selected!")
+          
+        }else{
+          //alert($(this).serialize())
+          localStorage.setItem("programme",$(this).serialize())
+          $("#programme .result").show()
+          $("#programme .result").text("Residence data saved success!")
+          
+         
+        }
+      })
+       
+         
+      })
+    
+        
+        
+    </script>
+    
+
+    

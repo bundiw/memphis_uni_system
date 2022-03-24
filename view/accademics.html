@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        highschool
+        school name
+        location
+        country
+        city 
+        town
+
+        qualificaion
+        GPA score
+
+        highest level of education in a dropdown
+        college
+        universiity
+
+        location
+        country
+        city 
+        town
+
+        qualificaion
+        GPA score
+    -->
+    <h2>Accademic Background</h2>
+        <form id="school-form" method="post">
+            <fieldset>
+                <legend>
+                    <h2>High School Education</h2>
+                </legend>
+                <label for="school"><b>School Name</b></label>
+                <input type="text" placeholder="Enter Name of High School Attended" name="school" required />
+        
+                <label for="city"><b>Nearest City</b></label>
+                <input type="text" placeholder="Enter the Nearest City to the school" name="city" required />
+        
+                <label for="town"><b>Nearest Town</b></label>
+                <input type="text" placeholder="Enter the Nearest Town to the school" name="town" required />
+        
+                <label for="zip-addr"><b>Zip Address</b></label>
+                <input type="text" placeholder="E.g. Los Angeles, CA: 90210 " name="zip-addr" required />
+        
+                <label for="gpa">GPA Score</label>
+                <select name="gpa" id="gpa">
+                    <option value="">Select GPA Class</option>
+                    <option value="2-3">2.0-3.0</option>
+                    <option value="3-4">3.0-4.0</option>
+                    <option value="4-5">4.0-5.0</option>
+                </select>
+
+                <input type="submit" value="Save" />
+                <div style="color:rgb(12, 100, 182); text-align: center; padding:10px; margin:5px; " class="result"></div>
+                <button type="button" id="next3" class="cancelbtn">Next</button>
+        
+        
+            </fieldset>
+        </form>
+
+
+
+        <form id="tertiary-form" method="post">
+            <fieldset>
+                <legend>
+                    <h2>Tertiary Education (optional)</h2>
+                </legend>
+                <label for="level"><b>Tertiary Level</b></label>
+                <select name="level" id="level">
+                    <option value="">SELECT Option</option>
+                    <option value="institute">Institute</option>
+                    <option value="college">College</option>
+                    <option value="university">University</option>
+                </select>
+
+                <label for="school"><b>Institution Name</b></label>
+                <input type="text" placeholder="Enter Name of High School Attended" name="school" required />
+        
+                <label for="city"><b>Nearest City</b></label>
+                <input type="text" placeholder="Enter the Nearest City to the school" name="city" required />
+        
+                <label for="town"><b>Nearest Town</b></label>
+                <input type="text" placeholder="Enter the Nearest Town to the school" name="town" required />
+        
+                <label for="zip-addr"><b>Zip Address</b></label>
+                <input type="text" placeholder="E.g. Los Angeles, CA: 90210 " name="zip-addr" required />
+                        
+                <label for="gpa">GPA Score</label>
+                <select name="gpa" id="gpa">
+                    <option value="">Select GPA Class</option>
+                    <option value="2-3">2.0-3.0</option>
+                    <option value="3-4">3.0-4.0</option>
+                    <option value="4-5">4.0-5.0</option>
+                </select>
+        
+                <input type="submit" value="Save" />
+                <div style="color:rgb(12, 100, 182);text-align: center; padding:10px; margin:5px; " class="result"></div>
+                      
+        
+            </fieldset>
+        </form>
+
+        <script>
+            $(document).ready(function () {
+                //hide some elements to reduce the size of page
+                $(".result").hide()
+                $("#tertiary-form").hide()
+               
+
+                $("#next3").click(function () {
+                    $("#school-form").hide()
+                    $("#tertiary-form").show()
+                })
+                
+                $("#school-form").on("submit", function (event) {
+                    event.preventDefault()
+                    const highschool = $(this).serialize()
+                    if ($("#gpa").val() == "" ) {
+                        alert("Please select your GPA Class")
+                    } else {
+                        localStorage.setItem("highschool", highschool)
+                        $("#school-form .result").show()
+                        $("#school-form .result").text("Highschool data saved success!")
+
+                    }
+                })
+
+                $("#tertiary-form").on("submit", function (event) {
+                    event.preventDefault()
+                    const tertiary = $(this).serialize()
+                    
+                    if ($("#level").val() == "" || $("#tertiary-form #gpa").val()=="") {
+                        alert("Please select Level and GPA")
+                    } else {
+                        localStorage.setItem("tertiary", tertiary)
+                        $("#tertiary-form .result").show()
+                        $("#tertiary-form .result").text("Tertiary Education data saved success!")
+
+                    }
+                })
+
+
+            })
+
+
+
+
+        </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<!--
+    application status(processing success failed)
+
+    program  applied
+-->
+<h2>Application Status</h2>
+<fieldset>
+    <legend>
+     <h3> Programme Applied</h3>   
+    </legend>
+    <h3></h3>
+    <h4>Processing/Success/failed</h4>
+    <p>
+        The remark from Memphis
+    </p>
+</fieldset>
+<script>
+    $(document).ready(function(){
+        const userob = JSON.parse(localStorage.getItem("user"))
+        //SELECT `adm_id`, `a_id`, `remark`, `status` FROM `admission_status` WHERE 1
+        //"study_level":"degree","study_programme"
+        $.post("../API/admissionStatus.php",
+        {"aid": userob.app_id},
+        function(res,status){
+            const response=JSON.parse(res)
+            if (response.error == false) {
+                $("fieldset p").text("Remarks: "+response.admission.remark)
+                $("fieldset h4").text("Status: "+response.admission.status)
+                $("fieldset>h3").text((response.admission.study_level).toUpperCase() +" in "+ response.admission.study_programme.toUpperCase())
+                
+            }else{
+                //no data present
+                $("fieldset h4").text("Application submitted Success and is awaiting processing")
+            }
+            //admission
+          
+        })
+    })
+</script>
+</body>
+
+</html>

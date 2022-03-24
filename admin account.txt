@@ -1,0 +1,9 @@
+sample accounts
+
+user applicant
+email: mary@gmail.com
+password: 123
+
+user admin
+email: admission@gmail.com
+password: admin

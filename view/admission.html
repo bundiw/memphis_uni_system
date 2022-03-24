@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2>Admission Applications</h2>
+<div id="applicants">
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Email</th>
+            <th>Nationality</th>
+            <th>Highschool GPA</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>test@gmail.com</td>
+            <td>Canadian</td>
+            <td>3-4</td>
+            <td><button id="applicant-id">more</button></td>
+        </tr>
+    </table>
+</div>
+
+<script src="../script//query-3.6.0.js"></script>   
+<script>
+    $(document).ready(function(){
+       const userob = JSON.parse(localStorage.getItem("user"))
+        
+        $.post("../API/applications.php",{
+            "staffid": userob.staff_id
+        },function(res,status){
+            //{"error":false,"message":"Fetch Success!","applicants":{"app_id":26,"app_email":"mary@gmail.com","nationality":"american","gpa":"3-4"}}
+           
+            const response = JSON.parse(res)
+            if (response.error == false) {
+                let tablestr =`<table>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Email</th>
+                                        <th>Nationality</th>
+                                        <th>Highschool GPA</th>
+                                        <th>Action</th>
+                                    </tr>`
+                const appli = response.applicants
+                let counter = 1
+                appli.forEach(element => {
+                    tablestr+=`<tr> <td>${counter}.</td>
+                                    <td>${element.app_email}</td>
+                                    <td>${element.nationality}</td>
+                                    <td>${element.gpa}</td>
+                                    <td><button id="${element.app_id}">see more</button></td>
+                                </tr>`
+                    counter++
+                });
+                tablestr +=` </table>`
+
+                 $("#applicants").html(tablestr)
+                 $("button").click(function () {
+                    const app_id = $(this).attr("id")
+                    //"info":{"app_id":26,"a_fname":"chstian","a_lname":"walker","a_sname":"kelly","a_dob":"1997-06-","a_gender":"Male","a_email":"mathew@gmail.com","a_phoneno":"2345678","nationality":"american","city":"mit","zip_addr":"1234","idcard_url":null,"highschool_file_url":null,"passport_file_url":null,"tertiary_file_url":null,"school_level":"Highschool","school_name":"0","gpa":"3-4","study_level":"degree","study_facualty":"arts","study_programme":"cre"}
+                    $.post("../API/applicantDetails.php",{
+                        "id": app_id
+
+                    },function(res,status){
+                        const response = JSON.parse(res)
+                        if (response.error == false) {
+                            const applInfo =response.info
+                            
+                            let applicantDetail = ` <form id='applicant-details'>
+                                                        
+                                                        <label for="app-id">Applicant ID</label>
+                                                        <input type='text' disabled value='${applInfo.app_id}' id='app-id'/>
+                                                        <label for="fname">First Name</label>
+                                                        <input type='text' disabled value='${applInfo.a_fname}' id='fname'/>
+                                                        <label for="lname">Last Name</label>
+                                                        <input type='text' disabled value='${applInfo.a_lname}' id='lname'/>
+                                                        <label for="">Surname</label>
+                                                        <input type='text' disabled value='${applInfo.a_lname}' id=''/>
+                                                        <label for="dob">DoB</label>
+                                                        <input type='text' disabled value='${applInfo.a_dob}' id='dob'/>
+                                                        <label for="gender">Gender</label>
+                                                        <input type='text' disabled value='${applInfo.a_gender}' id='gender'/>
+                                                        <label for="email">Email</label>
+                                                        <input type='text' disabled value='${applInfo.a_email}' id='email'/>
+                                                        <label for="phoneno">Phone No.</label>
+                                                        <input type='text' disabled value='${applInfo.a_phoneno}' id='phoneno'/>
+                                                        <label for="national">Nationality</label>
+                                                        <input type='text' disabled value='${applInfo.nationality}' id='national'/>
+                                                        <label for="city">City</label>
+                                                        <input type='text' disabled value='${applInfo.city}' id='city'/>
+                                                        <label for="zip-addr">Zip Address</label>
+                                                        <input type='text' disabled value='${applInfo.zip_addr}' id='zip-addr'/>
+                                                        <label for="card-url">ID Card File URL</label>
+                                                        <input type='text' disabled value='${applInfo.idcard_url}' id='card-url'/>
+                                                        <label for="high-url">High School Cert URL</label>
+                                                        <input type='text' disabled value='${applInfo.highschool_file_url}' id='high-url'/>
+                                                        <label for="pass-url">Tertiary Education Cert URL</label>
+                                                        <input type='text' disabled value='${applInfo.passport_file_url}' id='pass-url'/>
+                                                        <label for="sch-name">HighSchool Name</label>
+                                                        <input type='text' disabled value='${applInfo.school_name}' id='sch-name'/>
+                                                        <label for="gpa">GPA Attained in High School</label>
+                                                        <input type='text' disabled value='${applInfo.gpa}' id='gpa'/>
+                                                        <label for="programme">Applied Programme</label>
+                                                        <input type='text' disabled value='${applInfo.study_level} ${applInfo.study_programme}' id='programme'/>
+                                                        <label for="remark">Admission remark</label>
+                                                        <textarea name="remark" id="remark" cols="30" rows="10"></textarea>
+                                                        <label for="status"><b>Application Stage</b></label>
+                                                        <select name="status" id="status">
+                                                            <option value="">Select state</option>
+                                                            <option value="processing">Processing</option>
+                                                            <option value="successful">Successful</option>
+                                                            <option value="not sucessful">Not Successful</option>
+                                                        </select>
+                                                        <input type="submit" value="Save" />
+                                                        <div class="result">
+                                                        </div>
+                                                     </form>   
+                                                    `
+                            
+
+                            $("#applicants").html(applicantDetail)
+                            $(".result").hide()
+                            $("#applicant-details").on("submit",function(event){
+                                event.preventDefault()
+                                $(".result").show()
+                                if ($("#remark").val() == "" || $("#status").val()=="") {
+                                    $(".result").text("Please fill remark and stage field")
+                                    $(".result").css({color:"red",textAlign:"center", padding: "10px", margin:"5px"})
+                                }
+                                $.post("../API/statusUpdate.php",{
+                                    "id": applInfo.app_id,
+                                    remark:$("#remark").val(),
+                                    status: $("#status").val()
+                                },function(res,state){
+                                    const response = JSON.parse(res)
+                                    if (response.error == false) {
+                                         $(".result").css({ color: "blue", textAlign: "center",padding:"10px" , margin: "5px"})
+                                         $(".result").text(response.message)
+                                        
+                                    }else{
+                                        $(".result").text(response.message)
+                                        $(".result").css({ color: "red", textAlign: "center", padding: "10px", margin: "5px" })
+
+                                    }
+
+                                })
+                            })
+
+                            
+                        }else{
+                            alert(response.message)
+                        }
+
+                    })
+                    //rdirect to details
+                })
+
+                
+            }else{
+                $("#applicants").text(response.message)
+
+            }
+            
+        })
+        
+
+    })
+</script> 
+</body>
+</html>

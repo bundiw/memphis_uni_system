@@ -1,0 +1,28 @@
+$stmt =$conn->prepare($sql);
+      $aid= $user->app_id;
+       $afname=$personal['fname'];
+       $lname =$personal['lname'];
+
+      $asname= $personal['sname'];
+       $adob= $personal['dob'];
+       $agender =$personal['gender'];
+       $aphoneno =$personal['phoneno'];
+       $aidno = $personal['idno'];
+      $aemail= $personal['email'];
+       $krelationsip=$kin['relationship'];
+       $kfname=$kin['fname'];
+      $klname= $kin['lname'];
+      $ksname= $kin['sname'];
+       $kgender= $kin['gender'];
+       $kphoneno=$kin['phoneno'];
+       $kidno =$kin['idno'];
+       $kemail =$kin['email'];
+       $residence=$residenc['nationality'];
+       $city=$residenc['city'];
+       $zip=$residenc['zip-addr'];
+       $stmt->bind_param("issssssisssssssissss",$aid, $afname,$lname,$asname ,$adob,$agender, $aphoneno,$aidno,$aemail,$krelationsip,$kfname,$klname,  $ksname, $kgender,$kphoneno, $kidno ,  $kemail,$residence, $city,$zip);
+       $res =$stmt->execute();
+    //    $r=$stmt->store_result();
+    //    $res=$stmt->get_result();
+    //    echo $r." middle" ;
+        echo $res;

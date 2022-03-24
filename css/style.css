@@ -1,0 +1,136 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: whitesmoke;
+  background-color: black;
+  opacity: 0.8;
+  font-size: larger;
+  padding: 20px;
+  margin: 8px;
+  margin-left: 0;
+  width: 100%;
+  margin-right: 0;
+  margin-top: 0;
+}
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+h2 {
+  color: rgb(10, 4, 66);
+  padding: 15px;
+  margin: 5px;
+  background-color: wheat;
+  text-align: center;
+}
+form {
+  margin: auto;
+  margin-bottom: 10px;
+  width: 90%;
+}
+fieldset {
+  width: 80%;
+
+  margin: auto;
+  border: #555 solid 2px;
+}
+.panel-body {
+  width: 80%;
+  margin: auto;
+}
+[type="submit"] {
+  background-color: #04aa6d;
+  margin-bottom: 10px;
+}
+[type="submit"],
+button {
+  color: aliceblue;
+  text-align: center;
+  padding: 10px;
+  width: 60%;
+  margin: auto;
+  margin-top: 15px;
+  display: block;
+  border-radius: 30%;
+}
+[type="submit"]:hover,
+button:hover {
+  background-color: rgb(136, 137, 187);
+  color: rgb(18, 19, 18);
+  opacity: 0.5;
+}
+button {
+  background-color: rgb(14, 198, 204);
+
+  margin-bottom: 10px;
+}
+textarea,
+label,
+select,
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+  padding: 10px;
+  font-size: 20px;
+  margin-left: 3px;
+  width: 80%;
+  margin: auto;
+  display: block;
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
+}

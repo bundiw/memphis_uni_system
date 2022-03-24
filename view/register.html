@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body>
+
+    <form id="register" style="border:1px solid #ccc">
+        <div class="container">
+            <h1>Student Registration Form</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+
+            <label for="psw-repeat"><b>Repeat Password</b></label>
+            <input type="password" placeholder="Repeat Password" id="psw-repeat" name="psw-repeat" required>
+
+            
+            <div class="clearfix">
+                <button type="button" id="cancelbtn" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
+            <span class="psw">Already have an <a href="index.html">Account?</a></span>
+        </div>
+    </form>
+<script src="../script/query-3.6.0.js"></script>
+<script>
+
+    $(document).ready(function(){
+
+        $("#register").on("submit",function(event){
+           
+            event.preventDefault()
+         
+            if ($("#psw").val() == $("#psw-repeat").val()) {
+                //procedd to ajax   
+                const formdata = $(this).serialize()
+                console.log(formdata);
+                $.post("../API/register.php",
+                    formdata,
+                    function(res,status){
+                      
+                        const response=JSON.parse(res)
+                        if(response["error"] == false){
+                            location.href="./index.html" 
+                        }else{
+                            alert(response.message)
+                        }
+
+                    })
+            }else{
+                alert("Confirm Password not equal to Password value")
+            }
+            
+        
+        })
+
+        $("#cancelbtn").click(function(){
+            $("input").val("")
+        })
+
+    })
+</script>
+</body>
+
+</html>
